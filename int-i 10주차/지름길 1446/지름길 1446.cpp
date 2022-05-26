@@ -7,38 +7,38 @@
 using namespace std;
 
 int n, d;
-
+ 
 vector<pair<int, int>> A[10001];
 
-int d_[10001]; // Áö¸§±æ ´©ÀûÇØ¼­ ÀúÀå
+int d_[10001]; // ì§€ë¦„ê¸¸ ëˆ„ì í•´ì„œ ì €ì¥
 
 void input() {
 	cin >> n >> d;
 	for (int i = 0; i <= d; i++)
 	{
-		d_[i] = 10001; // ÀÏ´Ü ÃÖ´ñ°ªÀ¸·Î ÃÊ±âÈ­
+		d_[i] = 10001; // ì¼ë‹¨ ìµœëŒ“ê°’ìœ¼ë¡œ ì´ˆê¸°í™”
 	}
 	d_[d] = d;
 	for (int i = 0; i < n; i++)
 	{
 		int from, to, cost;
 		cin >> from >> to >> cost;
-		if (to - from <= cost)continue; // Áö¸§±æÀÌ ¾Æ´Ñ°æ¿ì
-		if (to > d)continue; // °Å¸®¸¦ ³Ñ¾î°¡´Â °æ¿ì
+		if (to - from <= cost)continue; // ì§€ë¦„ê¸¸ì´ ì•„ë‹Œê²½ìš°
+		if (to > d)continue; // ê±°ë¦¬ë¥¼ ë„˜ì–´ê°€ëŠ” ê²½ìš°
 		A[from].push_back(make_pair(to, cost));
 	}
 }
 
 void solve() {
-	// d_¹è¿­ »óÅÂ : d ÀÎµ¦½º »©°í´Â ´Ù 1001·Î ÃÊ±âÈ­
-	// d_ : i¿¡ µµÂøÇÏ±â À§ÇÑ ÃÖ¼Ò ¿îÀü °Å¸® ÀúÀå
+	// d_ë°°ì—´ ìƒíƒœ : d ì¸ë±ìŠ¤ ë¹¼ê³ ëŠ” ë‹¤ 1001ë¡œ ì´ˆê¸°í™”
+	// d_ : iì— ë„ì°©í•˜ê¸° ìœ„í•œ ìµœì†Œ ìš´ì „ ê±°ë¦¬ ì €ì¥
 	int prev = -1;
 	for (int i = 0; i <= d; i++) {
 		if (i != 0)prev = d_[i - 1]; 
 		d_[i] = min(d_[i], prev + 1);
-		for (auto next : A[i]) { // A¸¦ next·Î ÀĞ¾î¿Â´Ù
-			if (d_[i] + next.second < d_[next.first]) { // Áö¸§±æ·Î ÀÌµ¿ÇßÀ» ¶§ < ÀÌÀü °æ·Î¿¡¼­ ¿îÀüÇßÀ» ¶§ 
-				d_[next.first] = d_[i] + next.second; // ±× ´ÙÀ½ °¥ °÷¿¡ ÀúÀåÇØ³õ´Â´Ù
+		for (auto next : A[i]) { // Aë¥¼ nextë¡œ ì½ì–´ì˜¨ë‹¤
+			if (d_[i] + next.second < d_[next.first]) { // ì§€ë¦„ê¸¸ë¡œ ì´ë™í–ˆì„ ë•Œ < ì´ì „ ê²½ë¡œì—ì„œ ìš´ì „í–ˆì„ ë•Œ 
+				d_[next.first] = d_[i] + next.second; // ê·¸ ë‹¤ìŒ ê°ˆ ê³³ì— ì €ì¥í•´ë†“ëŠ”ë‹¤
 			}
 		}
 	}
