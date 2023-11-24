@@ -9,8 +9,6 @@ using namespace std;
 
 int dr[4] = { 1,0,-1,0 }; int dc[4] = { 0,1,0,-1 };
 vector<vector<int>> table_; vector<vector<int>> game_;
-vector<vector<pair<int, int>>> t(2500); // table의 block 좌표
-vector<int> block_cnt; // 블록 개수 
 bool visited[51][51];
 int R, C;
 int result;
